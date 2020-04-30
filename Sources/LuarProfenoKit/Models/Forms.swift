@@ -9,6 +9,12 @@ public struct LPForm: Codable {
     public let treatmentDay: Int
     public let questions: [LPQuestion]
 
+    private enum CodingKeys: String, CodingKey {
+        case identifier
+        case treatmentDay = "treatment_day"
+        case questions
+    }
+
     public init(identifier: UUID, treatmentDay: Int, questions: [LPQuestion]) {
         self.identifier = identifier
         self.treatmentDay = treatmentDay
@@ -21,8 +27,8 @@ public enum LPAnswerType: Codable {
     case boolean
     case date
 
-    private enum CodingKeys: CodingKey {
-        case textOptions
+    private enum CodingKeys: String, CodingKey {
+        case textOptions = "text_options"
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -61,6 +67,12 @@ public struct LPQuestion: Codable {
     public let identifier: UUID
     public let question: String
     public let answerType: LPAnswerType
+
+    private enum CodingKeys: String, CodingKey {
+        case identifier
+        case question
+        case answerType = "answer_type"
+    }
 
     public init(identifier: UUID, question: String, answerType: LPAnswerType) {
         self.identifier = identifier
