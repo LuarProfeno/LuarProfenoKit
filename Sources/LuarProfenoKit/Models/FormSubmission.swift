@@ -25,17 +25,10 @@ public struct LPFormSubmission: Codable {
     }
 }
 
-public struct LPAnswer: Codable {
-    public let questionID: UUID
-    public let answer: String
+#if canImport(Combine)
+import Combine
 
-    private enum CodingKeys: String, CodingKey {
-        case questionID = "question_id"
-        case answer
-    }
-
-    public init(questionID: UUID, answer: String) {
-        self.questionID = questionID
-        self.answer = answer
-    }
+extension LPFormSubmission: Identifiable {
+    public var id: UUID { identifier }
 }
+#endif

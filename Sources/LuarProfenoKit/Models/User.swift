@@ -12,6 +12,7 @@ public enum LPUserType: String, Codable {
 public struct LPUser: Codable {
     public let identifier: UUID
     public let username: String
+    public let dateOfBirth: Date
     public let treatmentStartDate: Date
     public let userType: LPUserType
     public let formSubmissions: [LPFormSubmission]
@@ -19,14 +20,19 @@ public struct LPUser: Codable {
     private enum CodingKeys: String, CodingKey {
         case identifier
         case username
+        case dateOfBirth = "date_of_birth"
         case treatmentStartDate = "treatment_start_date"
         case userType = "user_type"
         case formSubmissions = "form_submissions"
     }
 
-    public init(identifier: UUID, username: String, treatmentStartDate: Date, userType: LPUserType, formSubmissions: [LPFormSubmission]) {
+    public init(
+        identifier: UUID, username: String, dateOfBirth: Date,
+        treatmentStartDate: Date, userType: LPUserType, formSubmissions: [LPFormSubmission]
+    ) {
         self.identifier = identifier
         self.username = username
+        self.dateOfBirth = dateOfBirth
         self.treatmentStartDate = treatmentStartDate
         self.userType = userType
         self.formSubmissions = formSubmissions
